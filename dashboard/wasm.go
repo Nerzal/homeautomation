@@ -1,10 +1,9 @@
 package main
 
-import "time"
+import (
+	"github.com/Nerzal/homeautomation/dashboard/views/login"
+)
 
 func main() {
-	for {
-		println("Hello World!")
-		time.Sleep(time.Second)
-	}
+	login.RenderLogin()
 }

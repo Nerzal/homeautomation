@@ -1,0 +1,6 @@
+{
+    "go.toolsEnvVars": {
+        "GOROOT": "C:\\Users\\Tobias\\AppData\\Local\\tinygo\\goroot-go1.15.3-5ef9cf9d57d155ee7652447d4b0d6614d42300823238998f7e8364ff2337cf56",
+        "GOFLAGS": "-tags=js,wasm,tinygo,gc.conservative,scheduler.coroutines"
+    }
+}
