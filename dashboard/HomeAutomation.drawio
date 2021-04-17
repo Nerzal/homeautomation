@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-04-17T18:54:46.825Z" agent="5.0 (Windows)" etag="mkQYkZPv2VM5SsODN3Wd" version="14.6.1" type="github">
+<mxfile host="app.diagrams.net" modified="2021-04-17T18:56:38.482Z" agent="5.0 (Windows)" etag="bHRyY84Vs3pXXJu0GbDN" version="14.6.1" type="github">
   <diagram id="Jl8P6z5ckl5m-s0k10XG" name="Page-1">
     <mxGraphModel dx="1422" dy="763" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -23,22 +23,37 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="qCwq6TDE-BEXkywTyJn6-7" value="&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="209" y="490" width="410" height="230" as="geometry" />
+          <mxGeometry x="175" y="480" width="410" height="230" as="geometry" />
         </mxCell>
         <mxCell id="qCwq6TDE-BEXkywTyJn6-8" value="Microcontroller" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="239" y="620" width="120" height="60" as="geometry" />
+          <mxGeometry x="200" y="620" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="qCwq6TDE-BEXkywTyJn6-9" value="Licht" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="419" y="620" width="120" height="60" as="geometry" />
+          <mxGeometry x="380" y="620" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="qCwq6TDE-BEXkywTyJn6-11" value="" style="endArrow=classic;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="qCwq6TDE-BEXkywTyJn6-8" target="qCwq6TDE-BEXkywTyJn6-9">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="499" y="410" as="sourcePoint" />
-            <mxPoint x="549" y="360" as="targetPoint" />
+            <mxPoint x="460" y="410" as="sourcePoint" />
+            <mxPoint x="510" y="360" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="qCwq6TDE-BEXkywTyJn6-12" value="Wohnzimmer" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="259" y="510" width="80" height="20" as="geometry" />
+        <mxCell id="qCwq6TDE-BEXkywTyJn6-12" value="Schlafzimmer" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="220" y="510" width="80" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="qCwq6TDE-BEXkywTyJn6-14" value="MQTT Broker" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="320" y="330" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="qCwq6TDE-BEXkywTyJn6-16" value="" style="endArrow=classic;startArrow=classic;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="qCwq6TDE-BEXkywTyJn6-14" target="qCwq6TDE-BEXkywTyJn6-1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="390" y="410" as="sourcePoint" />
+            <mxPoint x="440" y="360" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="qCwq6TDE-BEXkywTyJn6-17" value="" style="endArrow=classic;startArrow=classic;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="qCwq6TDE-BEXkywTyJn6-7" target="qCwq6TDE-BEXkywTyJn6-14">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="390" y="410" as="sourcePoint" />
+            <mxPoint x="440" y="360" as="targetPoint" />
+          </mxGeometry>
         </mxCell>
       </root>
     </mxGraphModel>
