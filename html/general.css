@@ -88,6 +88,22 @@ body {
   color: #ffffff;
 }
 
+.login button:focus {
+  background-color: var(--background);
+  color: #ffffff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.login button:active {
+  background-color: transparent;
+  color: var(--background); 
+}
+
+.login .submit-container {
+  display: flex;
+  flex-direction: row;
+}
+
 .login .invalid-input {
   border-bottom: 1px solid red;
 }
@@ -95,4 +111,5 @@ body {
 .invalid-input-text {
   color: red;
   font-size: 14px;
+  margin-left: 10px;
 }

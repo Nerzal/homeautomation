@@ -87,14 +87,14 @@ func handleInvalidCredentials() {
 		return
 	}
 
-	loginComponent := doc.GetElementById("login-component")
+	submitComponent := doc.GetElementById("submit-container")
 
 	hintText := doc.CreateElement("p").
 		SetInnerHTML("invalid username or password!").
 		SetClass("invalid-input-text", "center").
 		SetId("invalid-input-text")
 
-	loginComponent.AppendChildBr(hintText)
+	submitComponent.AppendChild(hintText)
 
 }
 
@@ -125,13 +125,19 @@ func (s *Service) createLoginComponent() *tinydom.Element {
 		SetName("password").
 		SetAttribute("placeholder", "Password")
 
+	submitContainer := doc.CreateElement("div").
+		SetId("submit-container").
+		SetClass("submit-container")
+
 	loginButton := doc.
 		CreateElement("button").
 		SetAttribute("type", "button").
 		SetInnerHTML("Sign In").
 		AddEventListener("click", js.FuncOf(s.onLogin))
 
-	loginComponent.AppendChildren(header, userInput, passwordInput, loginButton)
+	submitContainer.AppendChild(loginButton)
+
+	loginComponent.AppendChildren(header, userInput, passwordInput, submitContainer)
 
 	s.userInput = userInput
 	s.passwordInput = passwordInput
