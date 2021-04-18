@@ -17,24 +17,9 @@
 
 .grid-container {
     display: grid;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: 20% 60% 20%;
     background-color: var(--prussian-blue);
     padding: 10px;
-    grid-auto-columns: 66.6%;
-}
-
-.grid-item {    
-    background-color: var(--prussian-blue);
-    border: 1px solid var(--dark-cyan);
-    padding: 20px;
-    font-size: 30px;
-    text-align: center;  
-}
-
-.grid-item-dummy {    
-    background-color: var(--independence);
-    border: 1px solid var(--dark-cyan);
-    padding: 20px;
 }
 
 .background {
@@ -83,4 +68,9 @@
 .invalid-input-text {
   color: red;
   font-size: 14px;
+}
+
+.header {
+  margin-top: 2%;
+  background-color: var(--background);
 }

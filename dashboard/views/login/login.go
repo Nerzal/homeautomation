@@ -4,8 +4,10 @@ import (
 	"syscall/js"
 
 	"github.com/Nerzal/tinydom"
+	"github.com/Nerzal/tinydom/elements/img"
 	"github.com/Nerzal/tinydom/elements/input"
 	"github.com/Nerzal/tinydom/elements/label"
+	"github.com/Nerzal/tinydom/elements/picture"
 )
 
 var doc = tinydom.GetDocument()
@@ -32,7 +34,22 @@ func (s *Service) RenderLogin() {
 	content.RemoveAllChildNodes()
 
 	headerComponent := doc.CreateElement("div").
-		SetClass("header")
+		SetClass("header", "grid-container")
+
+	tinyGoImage := img.New("/assets/tinygo-logo-wasm.png", "tinygo wasm logo")
+	tinyGoPicture := picture.New(tinyGoImage, nil).
+		SetClass("grid-item")
+
+	noobyGamesImage := img.New("/assets/noobygames.png", "noobygames logo")
+	noobyGamesLogo := picture.New(noobyGamesImage, nil).
+		SetClass("grid-item")
+
+	title := tinydom.GetDocument().
+		CreateElement("h1").
+		SetInnerHTML("TinyGo WASM Homeautomation Dashboard").
+		SetClass("title", "grid-item")
+
+	headerComponent.AppendChildren(tinyGoPicture, title, noobyGamesLogo)
 
 	loginComponent := s.createLoginComponent()
 
