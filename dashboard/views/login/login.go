@@ -31,32 +31,44 @@ func (s *Service) RenderLogin() {
 	content := doc.GetElementById("content")
 	content.RemoveAllChildNodes()
 
-	form := doc.CreateElement("div")
+	headerComponent := doc.CreateElement("div").
+		SetClass("header")
+
+	loginComponent := doc.CreateElement("div").
+		SetClass("login-component").
+		SetId("login-component")
 
 	userNameLabel := label.New().
 		SetFor("username").
-		SetInnerHTML("Name:")
+		SetInnerHTML("Name:").
+		SetClass("center", "label")
 
 	userInput := input.New(input.TextInput).
 		SetAutofocus(true).
 		SetId("username").
-		SetName("username")
+		SetName("username").
+		SetClass("center")
 
 	passwordLabel := label.New().
 		SetFor("password").
-		SetInnerHTML("Password:")
+		SetInnerHTML("Password:").
+		SetClass("center", "label")
 
 	passwordInput := input.New(input.PasswordInput).
 		SetId("password").
-		SetName("password")
+		SetName("password").
+		SetClass("center")
 
 	loginButton := input.New(input.ButtonInput).
-		SetValue("Login").
-		AddEventListener("click", js.FuncOf(s.onLogin))
+		SetValue("Sign In").
+		AddEventListener("click", js.FuncOf(s.onLogin)).
+		SetClass("center", "button")
 
-	form.AppendChildrenBr(userNameLabel, userInput, passwordLabel, passwordInput, loginButton)
+	loginComponent.AppendChildrenBr(userNameLabel, userInput, passwordLabel, passwordInput, loginButton)
 
-	content.AppendChild(form)
+	content.AppendChildren(headerComponent, loginComponent)
+
+	doc.GetElementById("username").Focus()
 
 	s.userInput = userInput
 	s.passwordInput = passwordInput
@@ -68,6 +80,8 @@ func (s *Service) onLogin(this js.Value, args []js.Value) interface{} {
 
 	println("user:", userInput)
 	println("password:", passwordInput)
+
+	// TODO: Let the Server(API) validate the credentials
 
 	if userInput != userName {
 		handleInvalidCredentials()
@@ -87,5 +101,31 @@ func (s *Service) onLogin(this js.Value, args []js.Value) interface{} {
 }
 
 func handleInvalidCredentials() {
-	tinydom.GetWindow().Alert("Invalid username or password")
+	// tinydom.GetWindow().Alert("Invalid username or password")
+	userInput := doc.GetElementById("username")
+	err := userInput.AppendClass("invalid-input")
+	if err != nil {
+		println("failed to append failed-input class:", err.Error())
+	}
+
+	passwordInput := doc.GetElementById("password")
+	err = passwordInput.AppendClass("invalid-input")
+	if err != nil {
+		println("failed to append failed-input class:", err.Error())
+	}
+
+	invalidInputText := doc.GetElementById("invalid-input-text")
+	if !invalidInputText.IsNull() {
+		return
+	}
+
+	loginComponent := doc.GetElementById("login-component")
+
+	hintText := doc.CreateElement("p").
+		SetInnerHTML("invalid username or password!").
+		SetClass("invalid-input-text", "center").
+		SetId("invalid-input-text")
+
+	loginComponent.AppendChildBr(hintText)
+
 }

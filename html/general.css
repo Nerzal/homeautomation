@@ -1,0 +1,86 @@
+:root {
+    --raisin-black: #1a181bff;
+    --independence: #564d65ff;
+    --dark-cyan: #3e8989ff;
+    --medium-aquamarine: #2cda9dff;
+    --erin: #05f140ff;
+
+    --rich-black-fogra-29: #0d1321ff;
+    --prussian-blue: #1d2d44ff;
+    --black-coral: #3e5c76ff;
+    --shadow-blue: #748cabff;
+    --eggshell: #f0ebd8ff;
+
+    --background: var(--rich-black-fogra-29);
+    --text-color: var(--eggshell);
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    background-color: var(--prussian-blue);
+    padding: 10px;
+    grid-auto-columns: 66.6%;
+}
+
+.grid-item {    
+    background-color: var(--prussian-blue);
+    border: 1px solid var(--dark-cyan);
+    padding: 20px;
+    font-size: 30px;
+    text-align: center;  
+}
+
+.grid-item-dummy {    
+    background-color: var(--independence);
+    border: 1px solid var(--dark-cyan);
+    padding: 20px;
+}
+
+.background {
+  background-color: var(--background);
+}
+
+.center {  
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%;
+  display: block;
+}
+
+.label {
+  color: var(--text-color);
+}
+
+.button {
+  color: var(--text-color);
+  background-color: var(--shadow-blue);
+  border: 1px solid var(--black-coral);
+}
+
+.button:hover{
+  background-color: var(--eggshell);
+  color: var(--black-coral);  
+}
+
+.button:active{
+  color: var(--text-color);
+  background-color: var(--shadow-blue);
+}
+
+.login-component {
+  margin: auto;
+  margin-top: 10% !important;
+  width: 50%;
+  background-color: var(--background);
+  border: 1px solid var(--black-coral);  
+}
+
+.invalid-input {
+  border: 2px solid red;  
+}
+
+.invalid-input-text {
+  color: red;
+  font-size: 14px;
+}

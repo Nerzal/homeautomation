@@ -19,9 +19,15 @@ func main() {
 
 func handleRequest(resp http.ResponseWriter, req *http.Request) {
 	resp.Header().Add("Cache-Control", "no-cache")
+
 	if strings.HasSuffix(req.URL.Path, ".wasm") {
 		println("providing wasm.wasm file")
 		resp.Header().Set("content-type", "application/wasm")
+	}
+
+	if strings.HasSuffix(req.URL.Path, ".css") {
+		println("providing css file")
+		resp.Header().Set("content-type", "text/css")
 	}
 
 	fs.ServeHTTP(resp, req)
