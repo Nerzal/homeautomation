@@ -6,8 +6,6 @@ import (
 	"github.com/Nerzal/tinydom"
 	"github.com/Nerzal/tinydom/elements/img"
 	"github.com/Nerzal/tinydom/elements/input"
-	"github.com/Nerzal/tinydom/elements/label"
-	"github.com/Nerzal/tinydom/elements/picture"
 )
 
 var doc = tinydom.GetDocument()
@@ -33,27 +31,9 @@ func (s *Service) RenderLogin() {
 	content := doc.GetElementById("content")
 	content.RemoveAllChildNodes()
 
-	headerComponent := doc.CreateElement("div").
-		SetClass("header", "grid-container")
-
-	tinyGoImage := img.New("/assets/tinygo-logo-wasm.png", "tinygo wasm logo")
-	tinyGoPicture := picture.New(tinyGoImage, nil).
-		SetClass("grid-item")
-
-	noobyGamesImage := img.New("/assets/noobygames.png", "noobygames logo")
-	noobyGamesLogo := picture.New(noobyGamesImage, nil).
-		SetClass("grid-item")
-
-	title := tinydom.GetDocument().
-		CreateElement("h1").
-		SetInnerHTML("TinyGo WASM Homeautomation Dashboard").
-		SetClass("title", "grid-item")
-
-	headerComponent.AppendChildren(tinyGoPicture, title, noobyGamesLogo)
-
 	loginComponent := s.createLoginComponent()
 
-	content.AppendChildren(headerComponent, loginComponent)
+	content.AppendChildren(loginComponent)
 
 	doc.GetElementById("username").Focus()
 
@@ -88,6 +68,8 @@ func (s *Service) onLogin(this js.Value, args []js.Value) interface{} {
 }
 
 func handleInvalidCredentials() {
+	println("login failed: invalid credentials provided")
+
 	userInput := doc.GetElementById("username")
 	err := userInput.AppendClass("invalid-input")
 	if err != nil {
@@ -118,36 +100,38 @@ func handleInvalidCredentials() {
 
 func (s *Service) createLoginComponent() *tinydom.Element {
 	loginComponent := doc.CreateElement("div").
-		SetClass("login-component").
+		SetClass("login").
 		SetId("login-component")
 
-	userNameLabel := label.New().
-		SetFor("username").
-		SetInnerHTML("Name:").
-		SetClass("center", "label")
+	header := doc.CreateElement("div").
+		SetClass("header")
+
+	title := doc.CreateElement("p").
+		SetInnerHTML("TinyGo Wasm Homeautomation Dashboard Login")
+
+	noobyGamesImg := img.New("assets/noobygames.png", "noobygames logo")
+	tinyGoImg := img.New("assets/tinygo-logo-wasm.png", "tinygo wasm logo")
+
+	header.AppendChildren(tinyGoImg.Element, title, noobyGamesImg.Element)
 
 	userInput := input.New(input.TextInput).
 		SetAutofocus(true).
 		SetId("username").
 		SetName("username").
-		SetClass("center")
-
-	passwordLabel := label.New().
-		SetFor("password").
-		SetInnerHTML("Password:").
-		SetClass("center", "label")
+		SetAttribute("placeholder", "Username")
 
 	passwordInput := input.New(input.PasswordInput).
 		SetId("password").
 		SetName("password").
-		SetClass("center")
+		SetAttribute("placeholder", "Password")
 
-	loginButton := input.New(input.ButtonInput).
-		SetValue("Sign In").
-		AddEventListener("click", js.FuncOf(s.onLogin)).
-		SetClass("center", "button")
+	loginButton := doc.
+		CreateElement("button").
+		SetAttribute("type", "button").
+		SetInnerHTML("Sign In").
+		AddEventListener("click", js.FuncOf(s.onLogin))
 
-	loginComponent.AppendChildrenBr(userNameLabel, userInput, passwordLabel, passwordInput, loginButton)
+	loginComponent.AppendChildren(header, userInput, passwordInput, loginButton)
 
 	s.userInput = userInput
 	s.passwordInput = passwordInput

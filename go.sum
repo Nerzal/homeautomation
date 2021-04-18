@@ -18,3 +18,5 @@ github.com/Nerzal/tinydom v0.0.12 h1:XWGBujegYFOG3MlqC6AcSrH/WAoHCwpGY+dDcnMHjE8
 github.com/Nerzal/tinydom v0.0.12/go.mod h1:MAc+PXGYz4xCAjc8IoRafq4wFnjo9onJ3fujTsicMjA=
 github.com/Nerzal/tinydom v0.0.13 h1:L6BAlMgbwQSGyNq2MgTuzb+SOIxpLv7zMEETcciR41s=
 github.com/Nerzal/tinydom v0.0.13/go.mod h1:MAc+PXGYz4xCAjc8IoRafq4wFnjo9onJ3fujTsicMjA=
+github.com/Nerzal/tinydom v0.0.14 h1:xIW5omOGC+UocfnK7x/zYk37Ev6Uv+EAaJUB6oFDdKU=
+github.com/Nerzal/tinydom v0.0.14/go.mod h1:MAc+PXGYz4xCAjc8IoRafq4wFnjo9onJ3fujTsicMjA=

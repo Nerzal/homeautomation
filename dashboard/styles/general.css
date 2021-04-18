@@ -15,62 +15,84 @@
     --text-color: var(--eggshell);
 }
 
-.grid-container {
-    display: grid;
-    grid-template-columns: 20% 60% 20%;
-    background-color: var(--prussian-blue);
-    padding: 10px;
-}
-
-.background {
+body {
   background-color: var(--background);
+  font-family: 'Zen Dots', cursive;
+  height: 100%;
 }
 
-.center {  
+.login {
+  display: block;
+  width: 35%;
+  max-width: 100%;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+  background-color: var(--eggshell);
   margin-left: auto;
   margin-right: auto;
+  margin-top: 10%;
+}
+
+.login:hover {
+  box-shadow: 0 14px 28px rgba(255,255,255,0.25), 0 10px 10px rgba(255,255,255,0.22);
+}
+
+.header {
+  padding-bottom: 40px;
+  display: flex;
+  flex-direction: row;
+}
+
+.header p {
+  font-size: 20px;  
+  text-align: center;
+}
+
+.header img {
+  margin-left: 1%;
+  margin-right: 1%;
   width: 40%;
-  display: block;
+  max-width: 100%;
 }
 
-.label {
-  color: var(--text-color);
+.login input {
+  width: calc(100% - 20px);
+  background-color: transparent;
+  padding: 10px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid rgba(0,0,0,0.6);
+  color: #000000;
+  margin-bottom: 20px;
+  outline: 0;
+  font-size: 16px;
+  font-family: 'Zen Dots', cursive;
 }
 
-.button {
-  color: var(--text-color);
-  background-color: var(--shadow-blue);
-  border: 1px solid var(--black-coral);
+.login button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: transparent;
+  color: var(--background);
+  border-radius: 5px;
+  border: 2px solid var(--background);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+  cursor: pointer;
 }
 
-.button:hover{
-  background-color: var(--eggshell);
-  color: var(--black-coral);  
-}
-
-.button:active{
-  color: var(--text-color);
-  background-color: var(--shadow-blue);
-}
-
-.login-component {
-  margin: auto;
-  margin-top: 10% !important;
-  width: 50%;
+.login button:hover {
   background-color: var(--background);
-  border: 1px solid var(--black-coral);  
+  color: #ffffff;
 }
 
-.invalid-input {
-  border: 2px solid red;  
+.login .invalid-input {
+  border-bottom: 1px solid red;
 }
 
 .invalid-input-text {
   color: red;
   font-size: 14px;
-}
-
-.header {
-  margin-top: 2%;
-  background-color: var(--background);
 }
