@@ -22,9 +22,13 @@ func (s *Service) RenderDashboard() {
 	content := doc.GetElementById("content")
 	content.RemoveAllChildNodes()
 
+	content.
+		Style().
+		SetHeight("100%")
+
 	dashboardLink := a.New("#", "Dashboard")
-	livingRoomLink := a.New("#", "LivingRoom")
-	// bedroomLink := a.New("#", "Bedroom")
+	livingRoomLink := a.New("#", "Livingroom")
+	bedroomLink := a.New("#", "Bedroom")
 
 	homeItem := li.New()
 	homeItem.AppendChild(dashboardLink.Element)
@@ -32,9 +36,14 @@ func (s *Service) RenderDashboard() {
 	livingRoomItem := li.New()
 	livingRoomItem.AppendChild(livingRoomLink.Element)
 
-	navigation := nav.New()
-	navigation.AppendListItem(homeItem)
-	navigation.AppendListItem(livingRoomItem)
+	bedroomItem := li.New()
+	bedroomItem.AppendChild(bedroomLink.Element)
 
-	content.AppendChild(navigation.Element)
+	navigation := nav.New().
+		AppendListItem(homeItem).
+		AppendListItem(livingRoomItem).
+		AppendListItem(bedroomItem).
+		SetClass("sidebar")
+
+	content.AppendChild(navigation)
 }

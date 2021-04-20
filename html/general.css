@@ -15,10 +15,15 @@
     --text-color: var(--eggshell);
 }
 
+html {
+  height: 100%;
+}
+
 body {
   background-color: var(--background);
   font-family: 'Zen Dots', cursive;
   height: 100%;
+  margin: 0%;
 }
 
 .login {
@@ -81,6 +86,7 @@ body {
   border: 2px solid var(--background);
   transition: all 0.3s cubic-bezier(.25,.8,.25,1);
   cursor: pointer;
+  font-family: 'Zen Dots', cursive;
 }
 
 .login button:hover {
@@ -113,3 +119,54 @@ body {
   font-size: 14px;
   margin-left: 10px;
 }
+
+.sidebar {
+  position: fixed;
+  width: 10%;
+  height: 100%;
+  background-color: var(--eggshell);
+}
+
+.sidebar:hover {
+  box-shadow: 0 14px 28px rgba(255,255,255,0.25), 0 10px 10px rgba(255,255,255,0.22);
+}
+
+.sidebar ul {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-left: 0px; 
+}
+
+.sidebar li {
+  list-style-type: none;
+  padding-top: 10px;
+  border-bottom: 1px solid rgba(0,0,0,0.6);
+  cursor: pointer;
+}
+
+.sidebar li:hover {
+  list-style-type: none;
+  padding-top: 10px;
+  border-bottom: 1px solid rgba(0,0,0,0.6);
+  cursor: pointer;
+  background-color: var(--background);
+}
+
+.sidebar li:active {
+  background-color: transparent;
+  color: var(--background);
+}
+
+.sidebar li a {
+  color: var(--background)
+}
+
+.sidebar li:hover a {
+  color: var(--eggshell)
+}
+
+.sidebar li:active a {
+  color: var(--background);
+}
+
+
