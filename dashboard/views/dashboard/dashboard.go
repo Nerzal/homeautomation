@@ -45,5 +45,9 @@ func (s *Service) RenderDashboard() {
 		AppendListItem(bedroomItem).
 		SetClass("sidebar")
 
-	content.AppendChild(navigation)
+	overview := doc.CreateElement("div").
+		SetId("overview").
+		SetClass("overview")
+
+	content.AppendChildren(navigation, overview)
 }
