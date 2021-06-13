@@ -23,5 +23,5 @@ dashboard-linux:
 	cp "dashboard/styles/general.css" "html/styles/general.css"
 	mkdir "html/assets"
 	cp -r "assets" "html/assets"
-	tinygo build -o "html/wasm.wasm" -opt=s --no-debug "dashboard/wasm.go"
+	tinygo build --target=wasm -o html/wasm.wasm -opt=s --no-debug dashboard/wasm.go
 	go run "api/main.go"

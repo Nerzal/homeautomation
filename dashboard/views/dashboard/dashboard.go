@@ -49,5 +49,7 @@ func (s *Service) RenderDashboard() {
 		SetId("overview").
 		SetClass("overview")
 
+	overview.AppendChild(tinydom.GetDocument().CreateElement("h1").SetInnerHTML("Overview"))
+
 	content.AppendChildren(navigation, overview)
 }
