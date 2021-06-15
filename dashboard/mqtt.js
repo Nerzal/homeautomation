@@ -1,9 +1,13 @@
 'use strict';
 
 var mqtt;
-const host = "127.0.0.1";
-const port = 9001;
-const cname = "noobygames-homeautomation";
+
+const host = "test.mosquitto.org";
+const port = 8080;
+
+// const host = "127.0.0.1";
+// const port = 9001;
+const cname = "noobygames-tinygo";
 
 function onConnect() {
     console.log("Successfully connected to mqtt the broker");
