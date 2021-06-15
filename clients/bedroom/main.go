@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	machine.D2.Configure(machine.PinConfig{Mode: machine.PinOutput})
+	machine.D4.Configure(machine.PinConfig{Mode: machine.PinOutput})
 
 	connectWifi()
 	mqttClient := connectMQTT()
@@ -24,14 +24,14 @@ func main() {
 func turnLightOn(client mqtt.Client, message mqtt.Message) {
 	println("handling turn light on message")
 
-	machine.D2.High()
+	machine.D4.High()
 	message.Ack()
 }
 
 func turnLightOff(client mqtt.Client, message mqtt.Message) {
 	println("handling turn light off message")
 
-	machine.D2.Low()
+	machine.D4.Low()
 	message.Ack()
 }
 
