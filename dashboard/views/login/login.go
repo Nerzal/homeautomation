@@ -36,7 +36,6 @@ func (s *Service) RenderLogin() {
 	content.AppendChildren(loginComponent)
 
 	doc.GetElementById("username").Focus()
-
 }
 
 func (s *Service) onLogin(this js.Value, args []js.Value) interface{} {

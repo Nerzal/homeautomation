@@ -184,3 +184,51 @@ body {
     margin-right: auto;
     height: 400px;
 }
+
+.overview input {
+    width: calc(100% - 20px);
+    background-color: transparent;
+    padding: 10px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.6);
+    color: #000000;
+    margin-bottom: 20px;
+    outline: 0;
+    font-size: 16px;
+    font-family: 'Zen Dots', cursive;
+}
+
+.overview button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: transparent;
+    color: var(--background);
+    border-radius: 5px;
+    border: 2px solid var(--background);
+    transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+    cursor: pointer;
+    font-family: 'Zen Dots', cursive;
+}
+
+.overview button:hover {
+    background-color: var(--background);
+    color: #ffffff;
+}
+
+.overview button:focus {
+    background-color: var(--background);
+    color: #ffffff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.overview button:active {
+    background-color: transparent;
+    color: var(--background);
+}
+
+.overview .submit-container {
+    display: flex;
+    flex-direction: row;
+}

@@ -17,6 +17,5 @@ func main() {
 	println("New user logged in:", loginEvent.UserName)
 
 	dashboardService.RenderDashboard()
-
 	select {}
 }

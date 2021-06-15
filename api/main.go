@@ -18,6 +18,8 @@ func main() {
 }
 
 func handleRequest(resp http.ResponseWriter, req *http.Request) {
+	println("requesting file:", req.URL.String())
+
 	resp.Header().Add("Cache-Control", "no-cache")
 
 	if strings.HasSuffix(req.URL.Path, ".wasm") {
