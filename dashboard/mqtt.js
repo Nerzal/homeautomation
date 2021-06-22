@@ -12,7 +12,9 @@ const cname = "noobygames-tinygo";
 function onConnect() {
     console.log("Successfully connected to mqtt the broker");
 
-    // handleOnConnect();
+    mqtt.subscribe("/noobygames/homeautomation/home/bedroom/light/status");
+
+    handleOnConnect();
 }
 
 function onMessageArrived(message) {

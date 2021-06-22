@@ -9,6 +9,8 @@ import (
 	"tinygo.org/x/drivers/wifinina"
 )
 
+var status = false
+
 func main() {
 	machine.D4.Configure(machine.PinConfig{Mode: machine.PinOutput})
 
@@ -17,14 +19,30 @@ func main() {
 
 	mqttClient.Subscribe("/noobygames/homeautomation/home/bedroom/light/on", 0, turnLightOn)
 	mqttClient.Subscribe("/noobygames/homeautomation/home/bedroom/light/off", 0, turnLightOff)
+	mqttClient.Subscribe("/noobygames/homeautomation/home/bedroom/light/status/request", 0, sendStatus)
 
 	select {}
+}
+
+func sendStatus(client mqtt.Client, message mqtt.Message) {
+	println("handling turn light on message")
+	message.Ack()
+
+	statusString := "off"
+	if status {
+		statusString = "on"
+	}
+
+	go func() {
+		client.Publish("/noobygames/homeautomation/home/bedroom/light/status", 1, false, statusString)
+	}()
 }
 
 func turnLightOn(client mqtt.Client, message mqtt.Message) {
 	println("handling turn light on message")
 
 	machine.D4.High()
+	status = true
 	message.Ack()
 }
 
@@ -32,12 +50,13 @@ func turnLightOff(client mqtt.Client, message mqtt.Message) {
 	println("handling turn light off message")
 
 	machine.D4.Low()
+	status = false
 	message.Ack()
 }
 
 func connectMQTT() mqtt.Client {
 	opts := mqtt.NewClientOptions().
-		AddBroker("tcp://192.168.2.102:1883").
+		AddBroker("tcp://test.mosquitto.org:1883").
 		SetClientID("bedroom" + randomString(5))
 	client := mqtt.NewClient(opts)
 
