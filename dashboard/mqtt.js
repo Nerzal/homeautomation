@@ -2,12 +2,12 @@
 
 var mqtt;
 
-const host = "test.mosquitto.org";
-const port = 8080;
+// const host = "test.mosquitto.org";
+// const port = 8080;
 
-// const host = "127.0.0.1";
-// const port = 9001;
-const cname = "noobygames-tinygo";
+const host = "127.0.0.1";
+const port = 9001;
+const cname = "noobygames-tinygo-1";
 
 function onConnect() {
     console.log("Successfully connected to mqtt the broker");
@@ -39,7 +39,7 @@ function ConnectToMQTT() {
 
     mqtt = new Paho.MQTT.Client(host, port, cname);
     var options = {
-        timeout: 3,
+        timeout: 1,
         onSuccess: onConnect,
     };
 

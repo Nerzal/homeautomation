@@ -64,8 +64,14 @@ func (s *Service) RenderDashboard() {
 	turnOnButton := doc.
 		CreateElement("button").
 		SetAttribute("type", "button").
-		SetInnerHTML("On").
+		SetInnerHTML("Blink").
 		AddEventListener("click", js.FuncOf(s.turnOn))
+
+	stopButton := doc.
+		CreateElement("button").
+		SetAttribute("type", "button").
+		SetInnerHTML("Stop").
+		AddEventListener("click", js.FuncOf(s.stop))
 
 	turnOffButton := doc.
 		CreateElement("button").
@@ -76,7 +82,7 @@ func (s *Service) RenderDashboard() {
 	buttonDescriptor := doc.CreateElement("h2").SetInnerHTML("Bedroom Lights")
 	bedromLightsStatus := doc.CreateElement("h3").SetId("status")
 
-	overview.AppendChildren(overviewHeader, doc.CreateElement("br"), buttonDescriptor, bedromLightsStatus, turnOnButton, turnOffButton)
+	overview.AppendChildren(overviewHeader, doc.CreateElement("br"), buttonDescriptor, bedromLightsStatus, turnOnButton, stopButton, turnOffButton)
 
 	content.AppendChildren(navigation, overview)
 }
@@ -98,6 +104,17 @@ func (s *Service) turnOff(this js.Value, args []js.Value) interface{} {
 	js.Global().
 		Get("publish").
 		Invoke("/noobygames/homeautomation/home/bedroom/light/off", "off", 2)
+
+	requestStatus()
+	return nil
+}
+
+func (s *Service) stop(this js.Value, args []js.Value) interface{} {
+	println("bedroom: turnOff button pressed")
+
+	js.Global().
+		Get("publish").
+		Invoke("/noobygames/homeautomation/home/bedroom/light/stop", "off", 2)
 
 	requestStatus()
 	return nil

@@ -1,23 +1,30 @@
 package main
 
 import (
+	"image/color"
 	"machine"
 	"math/rand"
+	"runtime/interrupt"
 	"time"
 
 	"tinygo.org/x/drivers/net/mqtt"
 	"tinygo.org/x/drivers/wifinina"
+	"tinygo.org/x/drivers/ws2812"
 )
 
 var status = false
+var leds [60]color.RGBA
+var ledStrip ws2812.Device
 
 func main() {
-	machine.D4.Configure(machine.PinConfig{Mode: machine.PinOutput})
+	machine.D2.Configure(machine.PinConfig{Mode: machine.PinOutput})
+	ledStrip = ws2812.New(machine.D2)
 
 	connectWifi()
 	mqttClient := connectMQTT()
 
 	mqttClient.Subscribe("/noobygames/homeautomation/home/bedroom/light/on", 0, turnLightOn)
+	mqttClient.Subscribe("/noobygames/homeautomation/home/bedroom/light/stop", 0, stop)
 	mqttClient.Subscribe("/noobygames/homeautomation/home/bedroom/light/off", 0, turnLightOff)
 	mqttClient.Subscribe("/noobygames/homeautomation/home/bedroom/light/status/request", 0, sendStatus)
 
@@ -43,10 +50,11 @@ func turnLightOn(client mqtt.Client, message mqtt.Message) {
 
 	machine.D4.High()
 	status = true
+	go animationOne()
 	message.Ack()
 }
 
-func turnLightOff(client mqtt.Client, message mqtt.Message) {
+func stop(client mqtt.Client, message mqtt.Message) {
 	println("handling turn light off message")
 
 	machine.D4.Low()
@@ -54,9 +62,48 @@ func turnLightOff(client mqtt.Client, message mqtt.Message) {
 	message.Ack()
 }
 
+func turnLightOff(client mqtt.Client, message mqtt.Message) {
+	for i := range leds {
+		leds[i] = color.RGBA{R: 0x00, G: 0x00, B: 0x00}
+	}
+
+	mask := interrupt.Disable()
+	ledStrip.WriteColors(leds[:])
+	interrupt.Restore(mask)
+
+	status = false
+	message.Ack()
+}
+
+func animationOne() {
+	br := false
+
+	for {
+		if !status {
+			return
+		}
+
+		br = !br
+		for i := range leds {
+			if br {
+				// Alpha channel is not supported by WS2812 so we leave it out
+				leds[i] = color.RGBA{R: 0x00, G: 0x00, B: 0xff}
+			} else {
+				leds[i] = color.RGBA{R: 0xff, G: 0xff, B: 0x00}
+			}
+		}
+
+		mask := interrupt.Disable()
+		ledStrip.WriteColors(leds[:])
+		interrupt.Restore(mask)
+
+		time.Sleep(100 * time.Millisecond)
+	}
+}
+
 func connectMQTT() mqtt.Client {
 	opts := mqtt.NewClientOptions().
-		AddBroker("tcp://test.mosquitto.org:1883").
+		AddBroker("tcp://192.168.2.102:1883").
 		SetClientID("bedroom" + randomString(5))
 	client := mqtt.NewClient(opts)
 
