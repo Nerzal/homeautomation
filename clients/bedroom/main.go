@@ -30,7 +30,7 @@ func main() {
 	connectWifi()
 	mqttClient := connectMQTT()
 
-	mqttClient.Subscribe("/noobygames/homeautomation/home/bedroom/light/on", 0, turnLightOn)
+	mqttClient.Subscribe("/noobygames/homeautomation/home/bedroom/light/on", 0, onBlink)
 	mqttClient.Subscribe("/noobygames/homeautomation/home/bedroom/light/stop", 0, stop)
 	mqttClient.Subscribe("/noobygames/homeautomation/home/bedroom/light/off", 0, turnLightOff)
 	mqttClient.Subscribe("/noobygames/homeautomation/home/bedroom/light/status/request", 0, sendStatus)
@@ -66,7 +66,7 @@ func sendStatus(client mqtt.Client, message mqtt.Message) {
 	}()
 }
 
-func turnLightOn(client mqtt.Client, message mqtt.Message) {
+func onBlink(client mqtt.Client, message mqtt.Message) {
 	println("handling turn light on message")
 
 	machine.D4.High()
