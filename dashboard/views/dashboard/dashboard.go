@@ -80,7 +80,7 @@ func (s *Service) RenderDashboard() {
 		AddEventListener("click", js.FuncOf(s.turnOff))
 
 	buttonDescriptor := doc.CreateElement("h2").SetInnerHTML("Bedroom Lights")
-	bedromLightsStatus := doc.CreateElement("h3").SetId("status")
+	bedromLightsStatus := doc.CreateElement("h3").SetId("status").SetInnerHTML("waiting for status response...")
 
 	overview.AppendChildren(overviewHeader, doc.CreateElement("br"), buttonDescriptor, bedromLightsStatus, turnOnButton, stopButton, turnOffButton)
 

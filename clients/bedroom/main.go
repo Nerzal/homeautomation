@@ -12,7 +12,14 @@ import (
 	"tinygo.org/x/drivers/ws2812"
 )
 
-var status = false
+const (
+	off     int = iota
+	stopped int = iota
+	blink   int = iota
+)
+
+var status = off
+
 var leds [60]color.RGBA
 var ledStrip ws2812.Device
 
@@ -28,16 +35,30 @@ func main() {
 	mqttClient.Subscribe("/noobygames/homeautomation/home/bedroom/light/off", 0, turnLightOff)
 	mqttClient.Subscribe("/noobygames/homeautomation/home/bedroom/light/status/request", 0, sendStatus)
 
-	select {}
+	for {
+		time.Sleep(time.Second)
+
+		if !mqttClient.IsConnected() || !mqttClient.IsConnectionOpen() {
+			println("connection lost, trying to reconnect")
+			connectWifi()
+			mqttClient = connectMQTT()
+		}
+	}
 }
 
 func sendStatus(client mqtt.Client, message mqtt.Message) {
 	println("handling turn light on message")
 	message.Ack()
 
-	statusString := "off"
-	if status {
-		statusString = "on"
+	var statusString = ""
+
+	switch status {
+	case off:
+		statusString = "off"
+	case stopped:
+		statusString = "stopped"
+	case blink:
+		statusString = "blinking"
 	}
 
 	go func() {
@@ -49,7 +70,7 @@ func turnLightOn(client mqtt.Client, message mqtt.Message) {
 	println("handling turn light on message")
 
 	machine.D4.High()
-	status = true
+	status = blink
 	go animationOne()
 	message.Ack()
 }
@@ -58,7 +79,7 @@ func stop(client mqtt.Client, message mqtt.Message) {
 	println("handling turn light off message")
 
 	machine.D4.Low()
-	status = false
+	status = stopped
 	message.Ack()
 }
 
@@ -71,7 +92,7 @@ func turnLightOff(client mqtt.Client, message mqtt.Message) {
 	ledStrip.WriteColors(leds[:])
 	interrupt.Restore(mask)
 
-	status = false
+	status = off
 	message.Ack()
 }
 
@@ -79,7 +100,7 @@ func animationOne() {
 	br := false
 
 	for {
-		if !status {
+		if status == stopped || status == off {
 			return
 		}
 
@@ -134,7 +155,7 @@ func connectWifi() {
 
 	wifi.Configure()
 
-	time.Sleep(5 * time.Second)
+	time.Sleep(2 * time.Second)
 
 	err = wifi.SetPassphrase("NoobyGames", "IchHasseLangeWlanZugangsDaten1312!")
 	if err != nil {
